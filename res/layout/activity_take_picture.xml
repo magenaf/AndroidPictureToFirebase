@@ -6,7 +6,7 @@
     android:weightSum="1">
 
     <TextView
-        android:text="Take a Picture"
+        android:text="Review Photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/text_title"

@@ -18,6 +18,12 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.example.magena.androidpicturetofirebase.R.id.img_picture;
 
 /**
  * Created by Magena on 3/6/2017.
@@ -40,9 +46,10 @@ public class TakePictureActivity extends Activity {
 
         btn_delete = (Button) findViewById(R.id.btn_delete);
         btn_identify = (Button) findViewById(R.id.btn_identify);
-        image_picture = (ImageView) findViewById(R.id.img_picture);
+        image_picture = (ImageView) findViewById(img_picture);
 
-        mStorageRef = FirebaseStorage.getInstance().getReference(); // root directory of storage
+        mStorageRef = FirebaseStorage.getInstance().getReferenceFromUrl("gs://resight-d6b9c.appspot.com");
+
         mProgress = new ProgressDialog(this);
         picturePath = "";
         takePicture();
@@ -79,19 +86,39 @@ public class TakePictureActivity extends Activity {
             mProgress.setMessage("Uploading image...");
             mProgress.show();
             Uri uri = data.getData();
-            StorageReference filepath = mStorageRef.child("Photos").child(uri.getLastPathSegment());
+            StorageReference filepath = mStorageRef.child("Photos").child("new photo");
             filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Toast.makeText(TakePictureActivity.this, "Uploading Finished", Toast.LENGTH_LONG).show();
                     mProgress.dismiss();
+                    Uri downloadUri = taskSnapshot.getDownloadUrl();
+                    Picasso.with(TakePictureActivity.this)
+                            .load(downloadUri)
+                            .fit().centerCrop()
+                            .rotate(90f)
+                            .into(image_picture);
+                    //sendNotificationToUser("Test", "Hi there!");
+
 
                 }
             });
 
+
         }
-        // set imageview to hold current picture
-        //image_picture.setImageResource(R.id.);
+
 
     }
+/*
+    public static void sendNotificationToUser(String user, final String message) {
+        Firebase ref = new Firebase(FIREBASE_URL);
+        final Firebase notifications = ref.child("notificationRequests");
+
+        Map notification = new HashMap<>();
+        notification.put("username", user);
+        notification.put("message", message);
+
+        notifications.push().setValue(notification);
+    }
+    */
 }
