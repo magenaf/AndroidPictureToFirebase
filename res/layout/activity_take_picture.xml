@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <TextView
+        android:text="Take a Picture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_title"
+        android:textSize="36sp"
+        android:textAlignment="center" />
+
+    <ImageView
+        app:srcCompat="@android:drawable/ic_menu_gallery"
+        android:id="@+id/img_picture"
+        android:layout_height="300dp"
+        android:layout_width="match_parent" />
+
+    <Button
+        android:text="Identify!"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_identify" />
+
+    <Button
+        android:text="Delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_delete"
+        android:elevation="1dp" />
+
+</LinearLayout>
