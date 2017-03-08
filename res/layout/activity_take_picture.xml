@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/btn_identify" />
 
+
     <Button
         android:text="Delete"
         android:layout_width="match_parent"

@@ -98,7 +98,7 @@ public class TakePictureActivity extends Activity {
                             .fit().centerCrop()
                             .rotate(90f)
                             .into(image_picture);
-                    //sendNotificationToUser("Test", "Hi there!");
+                    //send notification here
 
 
                 }
